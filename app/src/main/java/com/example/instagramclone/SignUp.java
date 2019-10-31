@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnSave, btnAllData;
+    private Button btnSave, btnAllData, btnNextActivity;
     private TextView txtGetData;
     private EditText edtName, edtKickSpeed, edtKickPower, edtPunchSpeed, edtPunchPower;
     private String allKickBoxers;
@@ -33,6 +33,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         btnSave = findViewById(R.id.xbtnSave);
         btnAllData = findViewById(R.id.xbtnAllData);
+        btnNextActivity = findViewById(R.id.xbtnNextActivity);
+
         edtName = findViewById(R.id.xedtName);
         edtPunchSpeed = findViewById(R.id.xedtPunchSpeed);
         edtPunchPower = findViewById(R.id.xedtPunchPower);
@@ -79,6 +81,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                    ParseQuery<ParseObject> allQuery = ParseQuery.getQuery("KickBoxer");
 
+                   allQuery.whereGreaterThan("punchSpeed",200);
+
                    allQuery.findInBackground(new FindCallback<ParseObject>() {
                        @Override
                        public void done(List<ParseObject> objects, ParseException e) {
@@ -107,6 +111,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
                }
            }); //end of onClickListener -btnAllData
+
+                btnNextActivity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+
+                    }
+                });
 
     } // end of onCreate
 
