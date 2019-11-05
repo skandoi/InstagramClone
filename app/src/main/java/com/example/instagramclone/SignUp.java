@@ -134,6 +134,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         Intent intent   = new Intent(SignUp.this,SocialMediaActivity.class);
         startActivity(intent);
+        finish();
 
     }
 
