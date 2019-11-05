@@ -1,7 +1,5 @@
 package com.example.instagramclone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -10,6 +8,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin.setOnClickListener(LoginActivity.this);
 
         if (ParseUser.getCurrentUser() != null){
-            ParseUser.logOut();
+            transitionSocialMediaActivity(); // if already logged in transition and do not ParseUser.logOut();
 //            ParseUser.getCurrentUser().logOut(); // as per the tutorial
         }
 
@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     if (user != null && e == null) {
                                         FancyToast.makeText(LoginActivity.this, user.getUsername() + " is Logged In",
                                                 Toast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                                        transitionSocialMediaActivity();
                                     } else {
                                         FancyToast.makeText(LoginActivity.this, "There was an error: " + e.getMessage(),
                                                 Toast.LENGTH_LONG, FancyToast.ERROR, false).show();
@@ -110,5 +111,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     } // end of rooLayoutTapped
+
+    private void transitionSocialMediaActivity()  {
+
+        Intent intent   = new Intent(LoginActivity.this,SocialMediaActivity.class);
+        startActivity(intent);
+
+    }
 
 }

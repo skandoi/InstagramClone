@@ -1,7 +1,5 @@
 package com.example.instagramclone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,20 +8,14 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 import com.shashank.sony.fancytoastlib.FancyToast;
-
-import java.util.List;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,7 +55,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
         if (ParseUser.getCurrentUser() != null){
-            ParseUser.logOut();
+            transitionSocialMediaActivity(); // if already logged in transition and do not ParseUser.logOut();
         } // ParseUser.getCurrentUser().logOut(); // as per the tutorial
 
 
@@ -97,6 +89,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             if (e == null) {
                                 FancyToast.makeText(SignUp.this, newUser.getUsername() + " is signed up",
                                         Toast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                                transitionSocialMediaActivity();
                             } else {
                                 FancyToast.makeText(SignUp.this, "There was an error: " + e.getMessage(),
                                         Toast.LENGTH_LONG, FancyToast.ERROR, false).show();
@@ -136,5 +129,12 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         }
 
     } // end of rooLayoutTapped
+
+    private void transitionSocialMediaActivity()  {
+
+        Intent intent   = new Intent(SignUp.this,SocialMediaActivity.class);
+        startActivity(intent);
+
+    }
 
 }
